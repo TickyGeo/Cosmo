@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Космический Сборщик</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #0a0a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        
+        #gameWrapper {
+            position: relative;
+            background: linear-gradient(180deg, #0a0a2e, #1a1a3e);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 0 60px rgba(100, 50, 255, 0.3);
+            border: 2px solid rgba(100, 50, 255, 0.2);
+        }
+        
+        canvas {
+            display: block;
+            border-radius: 10px;
+            background: #0d0d2b;
+            cursor: none;
+            width: 800px;
+            height: 600px;
+        }
+        
+        #ui {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            right: 30px;
+            display: flex;
+            justify-content: space-between;
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        #score {
+            color: #ffd700;
+            font-size: 28px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+        
+        #lives {
+            color: #ff4757;
+            font-size: 28px;
+        }
+        
+        #highScore {
+            color: #2ed573;
+            font-size: 20px;
+        }
+        
+        #gameOver {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            padding: 40px 60px;
+            border-radius: 20px;
+            border: 2px solid #ffd700;
+            text-align: center;
+            color: #fff;
+            display: none;
+            z-index: 20;
+            backdrop-filter: blur(10px);
+            min-width: 400px;
+        }
+        
+        #gameOver h1 {
+            color: #ff4757;
+            font-size: 48px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 40px rgba(255, 71, 87, 0.5);
+        }
+        
+        #gameOver .final-score {
+            font-size: 24px;
+            color: #ffd700;
+            margin: 10px 0;
+        }
+        
+        #gameOver .high-score {
+            color: #2ed573;
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        
+        #restartBtn {
+            margin-top: 20px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #ffd700, #ff6b00);
+            border: none;
+            border-radius: 50px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #0a0a1a;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        #restartBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+        }
+        
+        #controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.3);
+            font-size: 14px;
+            letter-spacing: 2px;
+            z-index: 5;
+            pointer-events: none;
+        }
+        
+        @media (max-width: 850px) {
+            canvas {
+                width: 95vw;
+                height: calc(95vw * 0.75);
+            }
+            
+            #gameWrapper {
+                padding: 10px;
+            }
+            
+            #gameOver {
+                min-width: auto;
+                padding: 30px;
+                width: 90%;
+            }
+            
+            #gameOver h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="gameWrapper">
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        
+        <div id="ui">
+            <div>
+                <div id="score">⭐ 0</div>
+                <div id="highScore">🏆 Рекорд: 0</div>
+            </div>
+            <div id="lives">❤️ ❤️ ❤️</div>
+        </div>
+        
+        <div id="gameOver">
+            <h1>💀 ИГРА ОКОНЧЕНА</h1>
+            <div class="final-score">⭐ Счёт: <span id="finalScore">0</span></div>
+            <div class="high-score">🏆 Рекорд: <span id="finalHighScore">0</span></div>
+            <button id="restartBtn">🔄 Играть снова</button>
+        </div>
+        
+        <div id="controls">🖱️ ДВИГАЙ МЫШЬЮ • СОБИРАЙ ЗВЁЗДЫ • УВОРАЧИВАЙСЯ</div>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>
